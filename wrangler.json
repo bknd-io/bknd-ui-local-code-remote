@@ -1,0 +1,38 @@
+{
+   "$schema": "node_modules/wrangler/config-schema.json",
+   "name": "cf-ui-local-code-remote",
+   "main": "src/index.ts",
+   "compatibility_date": "2025-08-03",
+   "compatibility_flags": ["nodejs_compat"],
+   "workers_dev": true,
+   "assets": {
+      "directory": "public"
+   },
+   "observability": {
+      "enabled": true
+   },
+   "vars": {
+      "ENVIRONMENT": "development"
+   },
+   "env": {
+      "production": {
+         "vars": {
+            "ENVIRONMENT": "production"
+         },
+         "d1_databases": [
+            {
+               "binding": "DB",
+               "database_name": "cf-local-remote",
+               "database_id": "2699b631-397c-4952-b6ce-0855f97aba39"
+            }
+         ]
+      }
+   },
+   "d1_databases": [
+      {
+         "binding": "DB",
+         "database_name": "cf-local-remote",
+         "database_id": "00000000-0000-0000-0000-000000000000"
+      }
+   ]
+}
