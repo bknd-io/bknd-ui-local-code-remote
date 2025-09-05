@@ -13,7 +13,8 @@ import { App } from "bknd";
 let app: App;
 export default {
    async fetch(request: Request, env: Env, ctx: ExecutionContext) {
-      const prod = env.ENVIRONMENT !== "development";
+      //const prod = env.ENVIRONMENT !== "development";
+      const prod = false;
       if (!prod || !app) {
          app = await createApp(config, { request, env, ctx });
       }
