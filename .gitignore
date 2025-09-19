@@ -172,3 +172,5 @@ bknd-types.d.ts
 worker-configuration.d.ts
 .history
 appconfig.json
+public/assets
+public/manifest.json

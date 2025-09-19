@@ -9,17 +9,13 @@ export default {
    d1: {
       session: true,
    },
-   buildConfig: {
-      // this instructs the build command to always perform a db sync.
-      // if you have CI/CD in place, you'd want to perform the sync on the CI/CD server instead using `npx bknd sync`
-      sync: true
-   },
    app: (env) => {
       // make sure to have `ENVIRONMENT` set, to determine the mode
       const prod = env.ENVIRONMENT !== "development";
       return {
          // in production mode, we use the appconfig.json file as static config
-         config: prod ? (appConfig as any) : undefined,
+         // in development, we use it as initial config
+         config: appConfig as any,
          options: {
             // switch between code and db mode based on the environment
             mode: prod ? "code" : "db",
@@ -32,7 +28,7 @@ export default {
             plugins: [
                syncConfig({
                   enabled: !prod,
-                  write: async ({ version, ...config }) => {
+                  write: async (config) => {
                      await devFsWrite(
                         "appconfig.json",
                         JSON.stringify(config, null, 2)

@@ -5,24 +5,26 @@
    "type": "module",
    "scripts": {
       "deploy": "wrangler deploy --env production",
-      "predeploy": "npm run bknd:config",
+      "predeploy": "npm run bknd:config && npm run bknd_prod -- sync --force",
       "dev": "vite",
       "dev:cf": "wrangler dev",
       "preview": "wrangler dev --env production",
-      "bknd": "PROXY=1 node --experimental-strip-types node_modules/.bin/bknd",
+      "bknd": "tsx node_modules/.bin/bknd",
       "bknd:types": "npm run bknd -- types",
       "bknd:config": "npm run bknd -- config --pretty --out appconfig.json",
       "bknd:secrets": "npm run bknd -- secrets --format env --template --out .env.example",
       "bknd:assets": "npm run bknd -- copy-assets --out public",
+      "bknd_prod": "CLOUDFLARE_ENV=production tsx node_modules/.bin/bknd",
       "typegen": "wrangler types && npm run bknd:types",
       "predev": "npm run bknd:config",
       "postinstall": "npm run bknd -- config --pretty --default --out appconfig.json && npm run typegen && npm run bknd:secrets && npm run bknd:assets"
    },
    "dependencies": {
-      "bknd": "^0.18.0-rc.2"
+      "bknd": "^0.18.0-rc.3"
    },
    "devDependencies": {
       "@cloudflare/vite-plugin": "^1.12.3",
+      "tsx": "^4.20.5",
       "typescript": "^5.9.2",
       "vite": "^7.1.4",
       "wrangler": "^4.28.1"
