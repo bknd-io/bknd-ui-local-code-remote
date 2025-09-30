@@ -24,6 +24,8 @@ export default {
                // this is specifically required for the production mode
                // make sure to have all secrets properly set in the environment
                secrets: env,
+               // optionally skip config validation in production mode
+               skipValidation: prod
             },
             plugins: [
                syncConfig({

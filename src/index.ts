@@ -3,7 +3,7 @@ import config from "../config";
 import { App } from "bknd";
 
 /**
- * We could simply return the `serve` function, but since we're using code,
+ * We could simply return the `serve` function, but since we're using `code` mode in production,
  * there are no race conditions that apply to db-stored config.
  *
  * Therefore we use the other approach of reusing the app across requests in production.
@@ -13,8 +13,8 @@ import { App } from "bknd";
 let app: App;
 export default {
    async fetch(request: Request, env: Env, ctx: ExecutionContext) {
-      //const prod = env.ENVIRONMENT !== "development";
-      const prod = false;
+      const prod = env.ENVIRONMENT !== "development";
+
       if (!prod || !app) {
          app = await createApp(config, { request, env, ctx });
       }

@@ -20,7 +20,7 @@
       "postinstall": "npm run bknd -- config --pretty --default --out appconfig.json && npm run typegen && npm run bknd:secrets && npm run bknd:assets"
    },
    "dependencies": {
-      "bknd": "^0.18.0-rc.3"
+      "bknd": "^0.18.0-rc.10"
    },
    "devDependencies": {
       "@cloudflare/vite-plugin": "^1.12.3",
